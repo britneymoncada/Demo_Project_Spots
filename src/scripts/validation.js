@@ -1,3 +1,12 @@
+const settings = {
+  formSelector: ".modal__form",
+  inputSelector: ".modal__input",
+  submitButtonSelector: ".modal__save-button",
+  inactiveButtonClass: "modal__save-button_inactive",
+  inputErrorClass: "modal__input-error_active",
+  errorClass: "modal__error_visible",
+};
+
 /* -------- FORM VALIDATION HELPERS --------- */
 
 function showInputError(formElement, inputElement, errorMessage, settings) {
@@ -66,3 +75,5 @@ function enableValidation(settings) {
     setEventListeners(form, settings);
   });
 }
+
+export { enableValidation, settings };

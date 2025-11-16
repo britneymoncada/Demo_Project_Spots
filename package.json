@@ -1,0 +1,36 @@
+{
+  "name": "se_project_spots",
+  "version": "0.1.0",
+  "description": "Sick Spots Gallery is a responsive website where users can share and discover unique places they’ve visited. It’s designed to be visually engaging and easy to use on any device, with a layout that adapts smoothly from 320px to 1440px screen widths.",
+  "homepage": "https://github.com/britneymoncada/se_project_spots#readme",
+  "bugs": {
+    "url": "https://github.com/britneymoncada/se_project_spots/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/britneymoncada/se_project_spots.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "webpack serve --mode development",
+    "build": "webpack --mode production",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@babel/core": "7.28.5",
+    "@babel/preset-env": "7.28.5",
+    "autoprefixer": "10.4.22",
+    "babel-loader": "10.0.0",
+    "clean-webpack-plugin": "4.0.0",
+    "css-loader": "7.1.2",
+    "html-webpack-plugin": "5.6.4",
+    "mini-css-extract-plugin": "2.9.4",
+    "postcss-loader": "8.2.0",
+    "style-loader": "4.0.0",
+    "webpack": "5.102.1",
+    "webpack-cli": "6.0.1",
+    "webpack-dev-server": "5.2.2"
+  }
+}

@@ -1,3 +1,17 @@
+import "./index.css";
+import { enableValidation, settings } from "../scripts/validation.js";
+import Logo from "../images/Logo.svg";
+import Avatar from "../images/Avatar.svg";
+import PencilIcon from "../images/Pencil-icon.svg";
+import PlusIcon from "../images/Plus-icon.svg";
+
+document.querySelector(".header__logo").src = Logo;
+document.querySelector(".profile__avatar").src = Avatar;
+document.querySelector(".profile__edit-button img").src = PencilIcon;
+document.querySelector(".profile__plus").src = PlusIcon;
+
+enableValidation(settings);
+
 // ==== 1. DATA (INITIAL CARDS) ==== //
 
 const initialCards = [
@@ -89,18 +103,7 @@ const newPostInputs = Array.from(newPostForm.querySelectorAll(".modal__input"));
 
 /*---------- START VALIDATION  -----------*/
 
-const settings = {
-  formSelector: ".modal__form",
-  inputSelector: ".modal__input",
-  submitButtonSelector: ".modal__save-button",
-  inactiveButtonClass: "modal__save-button_inactive",
-  inputErrorClass: "modal__input-error_active",
-  errorClass: "modal__error_visible",
-};
-
 let isEscListenerActive = false;
-
-enableValidation(settings);
 
 function handleEscKey(evt) {
   if (evt.key !== "Escape") return;
@@ -178,20 +181,11 @@ function getCardElement(data) {
   return cardElement;
 }
 
-/* ------------ RESET ERROR MESSAGES FUNCTION ------------ */
-
-const resetValidation = (formSelector, inputList, settings) => {
-  inputList.forEach((inputSelector) => {
-    hideInputError(formSelector, inputSelector, settings);
-  });
-};
-
 /* ------------ EDIT PROFILE FUNCTION ------------ */
 
 function editProfileSubmit() {
   profileName.textContent = editProfileNameInput.value;
   profileDescription.textContent = editProfileDescriptionInput.value;
-  resetValidation(editProfileForm, editProfileInputs, settings);
 }
 
 /* ------------- NEW CARD FUNCTION --------------- */
@@ -230,7 +224,6 @@ editProfileCloseBtn.addEventListener("click", () => {
 
 newPostBtn.addEventListener("click", (evt) => {
   openNewCardPost(evt);
-  newPostSaveBtn.disabled = true;
 });
 
 newPostForm.addEventListener("submit", (evt) => {
@@ -246,14 +239,12 @@ newPostForm.addEventListener("submit", (evt) => {
   cardsContainer.prepend(newCard);
 
   newPostForm.reset();
-  toggleButtonState(newPostInputs, newPostSaveBtn, settings);
 
   closeModal(newPostModal);
 });
 
 newPostCloseBtn.addEventListener("click", () => {
   closeModal(newPostModal);
-  button.disabled = true;
 });
 
 // ==== 6. INITIAL RENDERING ==== //
