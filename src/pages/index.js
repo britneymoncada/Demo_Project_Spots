@@ -196,6 +196,9 @@ function createCard(cardData) {
   // Preview
   cardImage.addEventListener("click", () => {
     cardPreviewCaption.textContent = cardData.name;
+    cardPreviewClose.addEventListener("click", () =>
+      closeModal(cardPreviewModal)
+    );
     cardPreviewModalImage.src = cardData.link;
     cardPreviewModalImage.alt = cardData.name;
     openModal(cardPreviewModal);
