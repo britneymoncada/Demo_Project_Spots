@@ -1,17 +1,17 @@
-/* =========================================================
-   BASE MODAL WRAPPER
-   ========================================================= */
 .modal {
   visibility: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
   position: fixed;
-  inset: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
   background-color: rgba(33, 33, 33, 0.4);
   opacity: 0;
   transition: visibility 0.3s, opacity 0.3s ease-in;
-  padding: 0 10px;
+  padding: 0 10px 0 10px;
 }
 
 .modal_opened {
@@ -19,26 +19,19 @@
   opacity: 1;
 }
 
-/* =========================================================
-   STANDARD MODAL CONTAINER
-   ========================================================= */
 .modal__container {
   display: flex;
-  flex-direction: column;
   max-width: 730px;
   width: 100%;
-  background-color: #fff;
+  background-color: rgba(255, 255, 255, 1);
   border-radius: 8px;
   padding: 32px 50px;
   box-sizing: border-box;
 }
 
-/* =========================================================
-   FORM & HEADERS
-   ========================================================= */
 .modal__form {
-  width: 100%;
   margin: 0;
+  width: 100%;
 }
 
 .modal__form-header {
@@ -52,9 +45,24 @@
   padding-bottom: 32px;
 }
 
-/* =========================================================
-   INPUTS & LABELS
-   ========================================================= */
+.modal__close-button {
+  background-image: url(../images/close-button.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  border: none;
+  opacity: 0.4;
+  width: 50px;
+  height: 50px;
+  padding: 0 0 24px 0;
+  cursor: pointer;
+}
+
+.modal__close-button:hover {
+  background-image: url(../images/close-btn-hover.png);
+  opacity: 1;
+}
+
 .modal__label {
   padding-bottom: 8px;
   font-size: 16px;
@@ -65,22 +73,21 @@
 .modal__inputs {
   display: flex;
   flex-direction: column;
-  width: 100%;
   box-sizing: border-box;
+  width: 100%;
   line-height: 100%;
 }
 
 .modal__input {
-  padding: 16px 12px;
   margin-bottom: 8px;
+  padding: 16px 12px;
   font-size: 20px;
   border-radius: 8px;
   border: 1px solid rgba(33, 33, 33, 0.4);
 }
 
-/* =========================================================
-   ERROR HANDLING
-   ========================================================= */
+/* INPUT ERROR STYLING  */
+
 .modal__input-error {
   display: none;
   color: #ff0000b2;
@@ -96,16 +103,13 @@
   display: block;
 }
 
-/* =========================================================
-   BUTTONS (GENERAL + SAVE)
-   ========================================================= */
 .modal__save-button {
   width: 156px;
   height: 52px;
-  margin: 0;
   border-radius: 8px;
-  background-color: #212121;
-  color: #fcf5e5;
+  margin: 0;
+  background-color: rgba(33, 33, 33, 1);
+  color: rgba(252, 245, 229, 1);
   font-size: 16px;
   font-weight: 500;
   cursor: pointer;
@@ -123,9 +127,6 @@
   color: #fcf5e5;
 }
 
-/* =========================================================
-   IMAGE PREVIEW MODAL
-   ========================================================= */
 .modal__preview-container {
   position: relative;
 }
@@ -138,130 +139,33 @@
 
 .modal__caption {
   background-color: #212121;
-  color: #fff;
+  color: white;
   border-radius: 8px;
-  padding: 8px;
   width: fit-content;
+  padding: 8px;
   font-size: 20px;
   font-weight: 500;
 }
 
-/* Close button (preview modal) */
 .modal__preview-close {
+  background-image: url(../images/close-preview.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  border: none;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  cursor: pointer;
   position: absolute;
   top: 0;
   left: calc(100% + 12.5px);
-  width: 40px;
-  height: 40px;
-  background: transparent url("../images/close-preview.png") center/contain
-    no-repeat;
-  border: none;
-  cursor: pointer;
 }
 
 .modal__preview-close:hover {
-  background-image: url("../images/close-hover-preview.png");
+  background-image: url(../images/close-hover-preview.png);
 }
 
-/* =========================================================
-   DELETE MODAL
-   ========================================================= */
-.modal__container_delete {
-  position: relative;
-  max-width: 630px;
-  padding: 32px 50px;
-  background: #fff;
-  border-radius: 8px;
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
-}
-
-.modal__close-delete {
-  position: absolute;
-  top: 0;
-  right: -40px;
-  width: 40px;
-  height: 40px;
-  background: transparent url("../images/close-delete.svg") center/24px
-    no-repeat;
-  border: none;
-  cursor: pointer;
-  z-index: 10;
-}
-
-.modal__close-delete:hover {
-  background-image: url("../images/close-btn-hover.png");
-}
-
-.modal__delete-title {
-  margin: 0;
-  font-size: 24px;
-  font-weight: 600;
-  color: #212121;
-  text-align: center;
-}
-
-.modal__form_delete {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-}
-
-.modal__delete-btn {
-  background-color: #ff6565;
-  color: #212121;
-  border: none;
-  padding: 16px 40px;
-  border-radius: 8px;
-  font-size: 18px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: background-color 0.25s ease;
-}
-
-.modal__delete-btn:hover {
-  background-color: #ff3333;
-}
-
-.modal__cancel-button {
-  background-color: transparent;
-  color: #212121;
-  border: 1px solid;
-  padding: 16px 40px;
-  border-radius: 8px;
-  font-size: 18px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: background-color 0.25s ease;
-}
-
-.modal__cancel-button:hover {
-  background-color: #212121;
-  color: #fff;
-}
-
-/* =========================================================
-   CLOSE BUTTON SHARED
-   ========================================================= */
-.modal__close-button {
-  width: 50px;
-  height: 50px;
-  padding-bottom: 24px;
-  background: transparent url("../images/close-button.svg") center no-repeat;
-  border: none;
-  opacity: 0.4;
-  cursor: pointer;
-}
-
-.modal__close-button:hover {
-  opacity: 1;
-  background-image: url("../images/close-btn-hover.png");
-}
-
-/* =========================================================
-   RESPONSIVE
-   ========================================================= */
 @media screen and (max-width: 668px) {
   .modal__container {
     margin: 10px;
@@ -271,13 +175,13 @@
   .modal__header {
     font-size: 20px;
   }
-
   .modal__save-button {
     width: 100%;
   }
 
   .modal__input {
     font-size: 16px;
+    margin-bottom: 8px;
   }
 }
 
@@ -295,6 +199,6 @@
   .modal__preview-close {
     position: relative;
     top: -8px;
-    left: 88%;
+    left: calc(88%);
   }
 }
