@@ -111,6 +111,20 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
   .catch(console.error);
 
 // ==================================================
+// LIKE TOGGLE (NO LIKE COUNT)
+// ==================================================
+function toggleLike(cardId, likeBtn) {
+  const liked = likeBtn.classList.contains("card__like-button-clicked");
+  const apiCall = liked ? api.removeLike(cardId) : api.addLike(cardId);
+
+  apiCall
+    .then(() => {
+      likeBtn.classList.toggle("card__like-button-clicked");
+    })
+    .catch(console.error);
+}
+
+// ==================================================
 // MODAL UTILITIES
 // ==================================================
 function openModal(modal) {
@@ -146,27 +160,6 @@ document.querySelectorAll(".modal").forEach((modal) => {
 });
 
 // ==================================================
-// MODAL CLOSE BUTTONS
-// ==================================================
-cardPreviewClose.addEventListener("click", () => closeModal(cardPreviewModal));
-deleteModalCloseBtn.addEventListener("click", () =>
-  closeModal(deleteCardModal)
-);
-cancelDeleteBtn.addEventListener("click", () => closeModal(deleteCardModal));
-
-newPostModal
-  .querySelector(".modal__close-button")
-  .addEventListener("click", () => closeModal(newPostModal));
-
-// Edit profile
-editProfileCloseBtn.addEventListener("click", () =>
-  closeModal(editProfileModal)
-);
-
-// Edit avatar
-editAvatarCloseBtn.addEventListener("click", () => closeModal(editAvatarModal));
-
-// ==================================================
 // CARD FACTORY FUNCTION
 // ==================================================
 function createCard(cardData) {
@@ -177,15 +170,21 @@ function createCard(cardData) {
   const cardName = card.querySelector(".card__name");
   const likeBtn = card.querySelector(".card__like-button");
   const deleteBtn = card.querySelector(".card__delete-btn");
-  const likeCount = card.querySelector(".card__like-count");
 
-  const likesArray = cardData.likes ?? [];
+  const likesArray = Array.isArray(cardData.likes) ? cardData.likes : [];
 
   card.dataset.id = cardData._id;
   cardImage.src = cardData.link;
   cardImage.alt = cardData.name;
   cardName.textContent = cardData.name;
-  likeCount.textContent = likesArray.length;
+
+  // If user already liked it → paint it red
+  if (likesArray.some((u) => u._id === window.currentUserId)) {
+    likeBtn.classList.add("card__like-button-clicked");
+  }
+
+  // Like button click
+  likeBtn.addEventListener("click", () => toggleLike(cardData._id, likeBtn));
 
   // Delete
   deleteBtn.addEventListener("click", () => {
@@ -193,15 +192,6 @@ function createCard(cardData) {
     selectedCardId = cardData._id;
     openModal(deleteCardModal);
   });
-
-  // Likes
-  if (likesArray.some((u) => u._id === window.currentUserId)) {
-    likeBtn.classList.add("card__like-button-clicked");
-  }
-
-  likeBtn.addEventListener("click", () =>
-    toggleLike(cardData._id, likeBtn, likeCount)
-  );
 
   // Preview
   cardImage.addEventListener("click", () => {
@@ -212,21 +202,6 @@ function createCard(cardData) {
   });
 
   return element;
-}
-
-// ==================================================
-// LIKE HANDLING
-// ==================================================
-function toggleLike(cardId, likeBtn, countSpan) {
-  const liked = likeBtn.classList.contains("card__like-button-clicked");
-  const apiCall = liked ? api.removeLike(cardId) : api.addLike(cardId);
-
-  apiCall
-    .then((updated) => {
-      likeBtn.classList.toggle("card__like-button-clicked");
-      countSpan.textContent = updated.likes.length;
-    })
-    .catch(console.error);
 }
 
 // ==================================================
