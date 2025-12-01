@@ -5,9 +5,7 @@ class Api {
   }
 
   _handleResponse(res) {
-    if (res.ok) {
-      return res.json();
-    }
+    if (res.ok) return res.json();
     return Promise.reject(`Error: ${res.status}`);
   }
 
@@ -68,4 +66,5 @@ class Api {
     }).then(this._handleResponse);
   }
 }
+
 export default Api;

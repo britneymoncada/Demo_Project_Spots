@@ -37,6 +37,7 @@ function toggleButtonState(inputList, buttonElement, settings) {
     buttonElement.disabled = false;
   }
 }
+
 /* -------- FORM EVENT LISTENERS--------- */
 
 function checkInput(formElement, inputElement, settings) {
@@ -67,6 +68,7 @@ function setEventListeners(formElement, settings) {
 
   toggleButtonState(inputs, button, settings);
 }
+
 /* -------- ENABLE VALIDATION --------- */
 
 function enableValidation(settings) {
@@ -76,4 +78,19 @@ function enableValidation(settings) {
   });
 }
 
-export { enableValidation, settings };
+/* -------- RESET VALIDATION (MISSING FUNCTION) --------- */
+
+function resetValidation(formElement, settings) {
+  const inputs = Array.from(
+    formElement.querySelectorAll(settings.inputSelector)
+  );
+  const button = formElement.querySelector(settings.submitButtonSelector);
+
+  inputs.forEach((input) => {
+    hideInputError(formElement, input, settings);
+  });
+
+  toggleButtonState(inputs, button, settings);
+}
+
+export { enableValidation, settings, resetValidation };
