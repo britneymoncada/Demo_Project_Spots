@@ -4,110 +4,94 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sick Spots</title>
-    <meta
-      name="description"
-      content="Find the sickest spots around town for vibes"
-    />
-    <meta name="author" content="Britney Moncada" />
-    <meta
-      name="keywords"
-      content="Travel, explore, cafe, outdoors, indoors, vibes, spots"
-    />
   </head>
+
   <body class="page">
     <header class="header">
-      <img alt="header logo" class="header__logo" />
+      <img class="header__logo" alt="Site logo" />
     </header>
-    <main class="content">
-      <!-- STARTING PROFILE PIC & DESCRIPTION -->
 
+    <main class="content page__content">
+      <!-- PROFILE -->
       <section class="profile page__section">
-        <img alt="header avatar" class="profile__avatar" />
-        <div class="profile__column">
-          <h1 class="profile__name">Bessie Coleman</h1>
-          <p class="profile__description">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-            Laboremaxime aut exercitationem optio vel ab voluptates quas aliquid
-          </p>
+        <div class="profile__avatar-container">
+          <img class="profile__avatar" alt="Profile avatar" />
+          <button
+            class="profile__avatar-edit-button"
+            type="button"
+            aria-label="Edit avatar"
+          ></button>
+        </div>
 
-          <!-- EDIT PROFILE & NEW POST BUTTONS -->
+        <div class="profile__column">
+          <h1 class="profile__name">Your Name</h1>
+          <p class="profile__description">Your description</p>
 
           <button class="profile__edit-button" type="button">
-            <img alt="edit profile button" />
+            <img alt="Edit icon" />
             Edit Profile
           </button>
         </div>
-        <button class="profile__post-button">
-          <img alt="new post button" class="profile__plus" />New Post
-        </button>
 
-        <!-- STARTING CARD CONTAINER + LIKE BUTTON -->
+        <button class="profile__post-button">
+          <img class="profile__plus" alt="Add post" />
+          New Post
+        </button>
       </section>
+
+      <!-- CARDS -->
       <section class="cards page__section">
         <ul class="cards__list">
           <template id="card-template">
             <li class="card">
-              <img src="#" alt="" class="card__image" />
-              <button
-                class="card__delete-btn"
-                type="button"
-                aria-label="card delete button"
-              ></button>
-              <div class="card__caption">
+              <img class="card__image" alt="" />
+              <div class="card__info">
                 <h2 class="card__name"></h2>
-                <button
-                  type="button"
-                  class="card__like-button"
-                  aria-label="card like button"
-                ></button>
+                <div class="card__like-container">
+                  <button class="card__like-button"></button>
+                </div>
               </div>
+              <button class="card__delete-btn"></button>
             </li>
           </template>
         </ul>
       </section>
     </main>
+
     <footer class="footer page__section">
       <p class="footer__text">2025 © Spots</p>
     </footer>
 
     <!-- NEW POST MODAL -->
-
-    <div
-      class="modal"
-      id="new-post-modal"
-      role="dialog"
-      aria-modal="true"
-      aria-hidden="true"
-    >
+    <div class="modal" id="new-post-modal">
       <div class="modal__container">
         <form class="modal__form">
           <div class="modal__form-header">
             <div class="modal__header">New Post</div>
             <button type="button" class="modal__close-button"></button>
           </div>
-          <div class="modal__inputs">
-            <label for="url" class="modal__label">Image link</label>
-            <input
-              type="url"
-              id="url"
-              placeholder="Paste a link to the picture"
-              class="modal__input"
-              required
-            />
 
+          <div class="modal__inputs">
+            <label for="url" class="modal__input-label">Image link</label>
+            <input
+              id="url"
+              class="modal__input"
+              type="url"
+              required
+              placeholder="Image URL"
+            />
             <span class="url-error modal__input-error"></span>
 
-            <label for="caption-text" class="modal__label">Caption</label>
+            <label for="caption-text" class="modal__input-label">Caption</label>
             <input
-              type="text"
               id="caption-text"
-              placeholder="Type your caption"
               class="modal__input"
-              required
+              type="text"
               minlength="2"
               maxlength="30"
+              required
+              placeholder="Caption"
             />
-
             <span class="caption-text-error modal__input-error"></span>
 
             <button class="modal__save-button" type="submit">Save</button>
@@ -117,7 +101,6 @@
     </div>
 
     <!-- EDIT PROFILE MODAL -->
-
     <div class="modal" id="edit-profile-modal">
       <div class="modal__container">
         <form class="modal__form">
@@ -125,30 +108,29 @@
             <div class="modal__header">Edit Profile</div>
             <button type="button" class="modal__close-button"></button>
           </div>
+
           <div class="modal__inputs">
-            <label for="edit-name" class="modal__label">Name</label>
+            <label for="edit-name" class="modal__input-label">Name</label>
             <input
-              type="text"
               id="edit-name"
-              placeholder="Type your name"
               class="modal__input"
-              required
+              type="text"
               minlength="2"
               maxlength="40"
+              required
             />
             <span class="edit-name-error modal__input-error"></span>
 
-            <label for="describe-yourself" class="modal__label"
+            <label for="describe-yourself" class="modal__input-label"
               >Description</label
             >
             <input
-              type="text"
               id="describe-yourself"
-              placeholder="Describe yourself"
               class="modal__input"
-              required
+              type="text"
               minlength="2"
               maxlength="200"
+              required
             />
             <span class="describe-yourself-error modal__input-error"></span>
 
@@ -158,11 +140,52 @@
       </div>
     </div>
 
+    <!-- EDIT AVATAR MODAL -->
+    <div class="modal" id="edit-avatar-modal">
+      <div class="modal__container">
+        <form class="modal__form" id="edit-avatar-form">
+          <div class="modal__form-header">
+            <div class="modal__header">Edit Avatar</div>
+            <button type="button" class="modal__close-button"></button>
+          </div>
+
+          <div class="modal__inputs">
+            <label for="avatar-link">Profile picture</label>
+            <input
+              id="avatar-link"
+              class="modal__input"
+              type="url"
+              required
+              placeholder="Image URL"
+            />
+            <span class="avatar-link-error modal__input-error"></span>
+
+            <button class="modal__save-button" type="submit">Save</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- DELETE CONFIRMATION -->
+    <div class="modal" id="delete-card-modal">
+      <div class="modal__container modal__container_delete">
+        <button class="modal__close-delete" type="button"></button>
+
+        <h3 class="modal__delete-title">Delete this image?</h3>
+
+        <form class="modal__form modal__form_delete" id="delete-card-form">
+          <button class="modal__delete-btn" type="submit">Delete</button>
+          <button class="modal__cancel-button" type="button">Cancel</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- IMAGE PREVIEW -->
     <div class="modal" id="modal__card-preview">
       <div class="modal__preview-container">
         <button class="modal__preview-close"></button>
-        <img class="modal__link" alt="link to img" src="" />
-        <div class="modal__caption">caption text</div>
+        <img class="modal__link" alt="" />
+        <div class="modal__caption"></div>
       </div>
     </div>
   </body>
